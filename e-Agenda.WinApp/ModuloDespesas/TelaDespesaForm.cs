@@ -44,6 +44,7 @@ namespace e_Agenda.WinApp.ModuloDespesas
             Despesa despesa = new Despesa(descricao, valor, data, formaPagamento);
             despesa.id = id;
 
+            despesa.CategoriasDaDespesa.AddRange(chListCategorias.CheckedItems.Cast<Categoria>());
 
             return despesa;
         }
@@ -54,6 +55,20 @@ namespace e_Agenda.WinApp.ModuloDespesas
             txtValor.Text = despesaSelecionada.Valor.ToString();
             txtData.Value = despesaSelecionada.Data;
             cmbFormaPagamento.SelectedItem = despesaSelecionada.TipoPagamento;
+
+            int i = 0;
+
+            for (int j = 0; j < chListCategorias.Items.Count; j++)
+            {
+                Categoria categoria = (Categoria)chListCategorias.Items[j];
+
+                if (despesaSelecionada.CategoriasDaDespesa.Contains(categoria))
+                {
+                    chListCategorias.SetItemChecked(i, true);
+                }
+
+                i++;
+            }
         }
         public void ConfigurarListaCategorias(List<Categoria> categorias)
         {
