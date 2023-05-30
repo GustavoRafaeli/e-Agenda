@@ -25,10 +25,14 @@ namespace e_Agenda.WinApp.ModuloCategoria
         {
             listDespesasDaCategoria.Items.Clear();
 
-            foreach (Despesa despesa in lista) 
+            foreach (Despesa despesa in lista)
             {
                 listDespesasDaCategoria.Items.Add(despesa);
             }
+        }
+        public void CarregarLabel(Categoria categoria)
+        {
+            lblCategoriaSelecionada.Text = categoria.Titulo;
         }
     }
 }
