@@ -85,5 +85,60 @@ namespace e_Agenda.WinApp.Compartilhado
 
             File.WriteAllBytes(NOME_ARQUIVO, registrosEmBytes);
         }
+
+        #region//RegistrosEmJason
+        //private void GravarRegistroEmArquivoJson()
+        //{
+        //    JsonSerializerOptions opcoes = new JsonSerializerOptions();
+        //    opcoes.IncludeFields = true;
+        //    opcoes.WriteIndented = true;
+
+        //    string registrosJson = JsonSerializer.Serialize(listaRegistros, opcoes);
+
+        //    File.WriteAllText(NOME_ARQUIVO, registrosJson);
+        //}
+
+        //private void CarregarCompromissosDoArquivoJson()
+        //{
+        //    JsonSerializerOptions opcoes = new JsonSerializerOptions();
+        //    opcoes.IncludeFields = true;
+
+        //    string registrosJson = File.ReadAllText(NOME_ARQUIVO);
+
+        //    if (registrosJson.Length > 0)
+        //        listaRegistros = JsonSerializer.Deserialize<List<TEntidade>>(registrosJson, opcoes);
+        //}
+        #endregion
+
+        #region//RegistrosEmXML
+
+        //private void CarregarRegistrosDoArquivoXML()
+        //{
+        //    XmlSerializer serializador = new XmlSerializer(typeof(List<Compromisso>));
+
+        //    MemoryStream registroStream = new MemoryStream();
+
+        //    serializador.Serialize(registroStream, listaRegistros);
+
+        //    byte[] compromissosEmBytes = registroStream.ToArray();
+
+        //    File.WriteAllBytes(NOME_ARQUIVO, compromissosEmBytes);
+        //}
+
+        //private void CarregarCompromissosDoArquivoXml()
+        //{
+        //    XmlSerializer serializador = new XmlSerializer(typeof(List<Compromisso>));
+
+        //    byte[] compromissoEmBytes = File.ReadAllBytes(NOME_ARQUIVO);
+
+        //    MemoryStream registroStream = new MemoryStream(compromissoEmBytes);
+
+        //    if (registroStream.Length > 10)
+        //    {
+        //        listaRegistros = (List<TEntidade>)serializador.Deserialize(registroStream);
+        //        AtualizarContador();
+        //    }
+        //}
+        #endregion
     }
 }
