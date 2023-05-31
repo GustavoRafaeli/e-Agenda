@@ -14,7 +14,7 @@ namespace e_Agenda.WinApp.ModuloDespesas
 {
     public partial class TelaDespesaForm : Form
     {
-        RepositorioCategoria repositorioCategoria;
+        RepositorioCategoriaEmMemoria repositorioCategoria;
 
         public TelaDespesaForm(List<Categoria> categorias)
         {

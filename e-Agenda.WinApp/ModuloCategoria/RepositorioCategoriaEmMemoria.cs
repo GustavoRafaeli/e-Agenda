@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace e_Agenda.WinApp.ModuloCategoria
 {
-    public class RepositorioCategoria : RepositorioBase<Categoria>
+    public class RepositorioCategoriaEmMemoria : RepositorioBaseEmMemoria<Categoria>, IRepositorioCategoria
     {
-        public RepositorioCategoria(List<Categoria> listaCategorias)
+        public RepositorioCategoriaEmMemoria(List<Categoria> listaCategorias)
         {
             listaRegistros = listaCategorias;
         }
-
     }
 }

@@ -2,9 +2,9 @@
 
 namespace e_Agenda.WinApp.ModuloContato
 {
-    public class RepositorioContato : RepositorioBase<Contato>
+    public class RepositorioContatoEmMemoria : RepositorioBaseEmMemoria<Contato>
     {
-        public RepositorioContato(List<Contato> contatos)
+        public RepositorioContatoEmMemoria(List<Contato> contatos)
         {
             this.listaRegistros = contatos;
         }

@@ -2,10 +2,10 @@
 {
     public class ControladorTarefa : ControladorBase
     {
-        private RepositorioTarefa repositorioTarefa;
+        private IRepositorioTarefa repositorioTarefa;
         private TabelaTarefaControl tabelaTarefas;
 
-        public ControladorTarefa(RepositorioTarefa repositorioTarefa)
+        public ControladorTarefa(IRepositorioTarefa repositorioTarefa)
         {
             this.repositorioTarefa = repositorioTarefa;
         }
@@ -227,7 +227,6 @@
 
             return tabelaTarefas;
         }
-
         public override string ObterTipoCadastro()
         {
             return "Cadastro de Tarefas";

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace e_Agenda.WinApp.ModuloDespesas
 {
-    public class RepositorioDespesa : RepositorioBase<Despesa>
+    public class RepositorioDespesaEmMemoria : RepositorioBaseEmMemoria<Despesa>
     {
-        public RepositorioDespesa(List<Despesa> listaDespesas)
+        public RepositorioDespesaEmMemoria(List<Despesa> listaDespesas)
         {
             this.listaRegistros = listaDespesas;
         }
