@@ -22,6 +22,10 @@ namespace e_Agenda.WinApp.ModuloCompromisso
 
         public TipoLocalEnum tipoLocal;
 
+        public Compromisso()
+        {
+        }
+
         public Compromisso(string assunto, DateTime data, TimeSpan horarioInicio, TimeSpan horarioFinal, 
             Contato contato, string local, TipoLocalEnum tipoLocal)
         {

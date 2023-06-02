@@ -7,6 +7,10 @@ namespace e_Agenda.WinApp.ModuloTarefa
         public string titulo;
         public bool concluido;
 
+        public ItemTarefa()
+        {
+        }
+
         public ItemTarefa(string titulo)
         {
             this.titulo = titulo;
@@ -43,6 +47,10 @@ namespace e_Agenda.WinApp.ModuloTarefa
         public DateTime dataCriacao;
         public List<ItemTarefa> items;
         public decimal percentualConcluido;
+
+        public Tarefa()
+        {
+        }
 
         public Tarefa(int id, string titulo, PrioridadeTarefaEnum prioridade, DateTime dataCriacao)
         {

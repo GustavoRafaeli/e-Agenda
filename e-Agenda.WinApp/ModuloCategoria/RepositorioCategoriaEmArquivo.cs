@@ -1,4 +1,5 @@
 ﻿using e_Agenda.WinApp.ModuloCompromisso;
+using e_Agenda.WinApp.ModuloContato;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,14 @@ namespace e_Agenda.WinApp.ModuloCategoria
 {
     public class RepositorioCategoriaEmArquivo : RepositorioArquivoBase<Categoria>, IRepositorioCategoria
     {
-        public RepositorioCategoriaEmArquivo(List<Categoria> categorias)
+        public RepositorioCategoriaEmArquivo(ContextoDados contextoDados) : base(contextoDados)
         {
-            NOME_ARQUIVO = "C:\\Users\\Itachi\\Desktop\\C#Projects\\e-Agenda-2023-master\\Arquivos\\categoria-bin";
 
-            listaRegistros = categorias;
+        }
 
-            if (File.Exists(NOME_ARQUIVO))
-                CarregarRegistrosDoArquivo();
+        public override List<Categoria> ObterRegistros()
+        {
+            return contextoDados.categorias;
         }
     }
 }

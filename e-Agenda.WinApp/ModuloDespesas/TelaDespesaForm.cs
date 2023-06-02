@@ -120,6 +120,5 @@ namespace e_Agenda.WinApp.ModuloDespesas
                 }
             }
         }
-        
     }
 }

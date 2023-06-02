@@ -20,6 +20,10 @@ namespace e_Agenda.WinApp.ModuloCategoria
             Despesas = new List<Despesa>();
         }
 
+        public Categoria()
+        {
+        }
+
         public override void AtualizarInformacoes(Categoria registroAtualizado)
         {
             this.Titulo = registroAtualizado.Titulo;

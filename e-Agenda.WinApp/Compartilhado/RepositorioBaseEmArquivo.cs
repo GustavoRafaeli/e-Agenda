@@ -3,91 +3,90 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace e_Agenda.WinApp.Compartilhado
 {
-    public class RepositorioArquivoBase<TEntidade> /*: IRepositorioBase<TEntidade>*/
+    public abstract class RepositorioArquivoBase<TEntidade> /*: IRepositorioBase<TEntidade>*/
         where TEntidade : EntidadeBase<TEntidade>
     {
+        private int contador;
+        protected ContextoDados contextoDados;
 
-        private static int contador;
+        //protected List<TEntidade> listaRegistros = new List<TEntidade>();
 
-        protected List<TEntidade> listaRegistros = new List<TEntidade>();
+        //protected string NOME_ARQUIVO = "";
 
-        protected string NOME_ARQUIVO = "";
-
-        public virtual void Inserir(TEntidade novoRegistro)
+        public RepositorioArquivoBase(ContextoDados contextoDados)
         {
-            contador++;
-            novoRegistro.id = contador;
-            listaRegistros.Add(novoRegistro);
+            //NOME_ARQUIVO = "ModuloContato/Contatos.json";
 
-            GravarRegistrosEmArquivo();
-        }
+            //if (File.Exists(ObterNomeArquivo()))
+            //    CarregarRegistrosDoArquivoJson();
 
-        public virtual void Editar(int id, TEntidade registroAtualizado)
-        {
-            EntidadeBase<TEntidade> registroSelecionada = SelecionarPorId(id);
-
-            registroSelecionada.AtualizarInformacoes(registroAtualizado);
-
-            GravarRegistrosEmArquivo();
-        }
-
-        public virtual void Excluir(TEntidade registroSelecionado)
-        {
-            listaRegistros.Remove(registroSelecionado);
-
-            GravarRegistrosEmArquivo();
-        }
-
-        public virtual TEntidade SelecionarPorId(int id)
-        {
-            if (listaRegistros.Exists(registro => registro.id == id))
-                return listaRegistros.FirstOrDefault(registro => registro.id == id);
-
-            return null;
-        }
-
-        public virtual List<TEntidade> SelecionarTodos()
-        {
-            return listaRegistros.OrderByDescending(x => x.id).ToList();
-        }
-
-        private void AtualizarContador()
-        {
-            contador = listaRegistros.Max(x => x.id);
-        }
-
-        protected void CarregarRegistrosDoArquivo()
-        {
-            BinaryFormatter serializador = new BinaryFormatter();
-
-            byte[] registroEmBytes = File.ReadAllBytes(NOME_ARQUIVO);
-
-            MemoryStream registroStream = new MemoryStream(registroEmBytes);
-
-            listaRegistros = (List<TEntidade>)serializador.Deserialize(registroStream);
+            this.contextoDados = contextoDados;
 
             AtualizarContador();
         }
 
-        protected void GravarRegistrosEmArquivo()
+        //protected abstract string ObterNomeArquivo();
+
+        public abstract List<TEntidade> ObterRegistros(); 
+
+        public virtual void Inserir(TEntidade novoRegistro)
         {
-            BinaryFormatter serializador = new BinaryFormatter();
+            List<TEntidade> registros = ObterRegistros();
 
-            MemoryStream registroStream = new MemoryStream();
+            contador++;
+            novoRegistro.id = contador;
+            registros.Add(novoRegistro);
 
-            serializador.Serialize(registroStream, listaRegistros);
+            contextoDados.GravarEmArquivosJson();
+        }
 
-            byte[] registrosEmBytes = registroStream.ToArray();
+        public virtual void Editar(int id, TEntidade registroAtualizado)
+        {
+            TEntidade registroSelecionada = SelecionarPorId(id);
 
-            File.WriteAllBytes(NOME_ARQUIVO, registrosEmBytes);
+            registroSelecionada.AtualizarInformacoes(registroAtualizado);
+
+            contextoDados.GravarEmArquivosJson();
+        }
+
+        public virtual void Excluir(TEntidade registroSelecionado)
+        {
+            List<TEntidade> registros = ObterRegistros();
+
+            registros.Remove(registroSelecionado);
+
+            contextoDados.GravarEmArquivosJson();
+        }
+
+        public virtual TEntidade SelecionarPorId(int id)
+        {
+            List<TEntidade> registros = ObterRegistros();
+
+            return registros.FirstOrDefault(x => x.id == id);
+        }
+
+        public virtual List<TEntidade> SelecionarTodos()
+        {
+            return ObterRegistros();
+        }
+
+        private void AtualizarContador()
+        {
+            if(ObterRegistros().Count > 0)
+            {
+                contador = ObterRegistros().Max(x => x.id);
+            }
         }
 
         #region//RegistrosEmJason
-        //private void GravarRegistroEmArquivoJson()
+
+        //protected void GravarRegistroEmArquivoJson()
         //{
         //    JsonSerializerOptions opcoes = new JsonSerializerOptions();
         //    opcoes.IncludeFields = true;
@@ -95,26 +94,56 @@ namespace e_Agenda.WinApp.Compartilhado
 
         //    string registrosJson = JsonSerializer.Serialize(listaRegistros, opcoes);
 
-        //    File.WriteAllText(NOME_ARQUIVO, registrosJson);
+        //    File.WriteAllText(ObterNomeArquivo(), registrosJson);
         //}
 
-        //private void CarregarCompromissosDoArquivoJson()
+        //protected void CarregarRegistrosDoArquivoJson()
         //{
         //    JsonSerializerOptions opcoes = new JsonSerializerOptions();
         //    opcoes.IncludeFields = true;
 
-        //    string registrosJson = File.ReadAllText(NOME_ARQUIVO);
 
-        //    if (registrosJson.Length > 0)
+        //    string registrosJson = File.ReadAllText(ObterNomeArquivo());
+
+
+        //    if (registrosJson.Length > 10)
         //        listaRegistros = JsonSerializer.Deserialize<List<TEntidade>>(registrosJson, opcoes);
         //}
         #endregion
 
-        #region//RegistrosEmXML
+        #region//RegistrosBinarios
 
-        //private void CarregarRegistrosDoArquivoXML()
+        //protected void CarregarRegistrosDoArquivoBin()
         //{
-        //    XmlSerializer serializador = new XmlSerializer(typeof(List<Compromisso>));
+        //    BinaryFormatter serializador = new BinaryFormatter();
+
+        //    byte[] registroEmBytes = File.ReadAllBytes(ObterNomeArquivo());
+
+        //    MemoryStream registroStream = new MemoryStream(registroEmBytes);
+
+        //    listaRegistros = (List<TEntidade>)serializador.Deserialize(registroStream);
+
+        //    AtualizarContador();
+        //}
+        //protected void GravarRegistrosEmArquivoBin()
+        //{
+        //    BinaryFormatter serializador = new BinaryFormatter();
+
+        //    MemoryStream registroStream = new MemoryStream();
+
+        //    serializador.Serialize(registroStream, listaRegistros);
+
+        //    byte[] registrosEmBytes = registroStream.ToArray();
+
+        //    File.WriteAllBytes(ObterNomeArquivo(), registrosEmBytes);
+        //}
+        #endregion
+
+        #region//RegistrosEmXML
+        //Testado em "CONTATOS"
+        //protected void GravarRegistrosDoArquivoXML()
+        //{
+        //    XmlSerializer serializador = new XmlSerializer(typeof(List<TEntidade>));
 
         //    MemoryStream registroStream = new MemoryStream();
 
@@ -122,14 +151,14 @@ namespace e_Agenda.WinApp.Compartilhado
 
         //    byte[] compromissosEmBytes = registroStream.ToArray();
 
-        //    File.WriteAllBytes(NOME_ARQUIVO, compromissosEmBytes);
+        //    File.WriteAllBytes(ObterNomeArquivo(), compromissosEmBytes);
         //}
 
-        //private void CarregarCompromissosDoArquivoXml()
+        //protected void CarregarCompromissosDoArquivoXml()
         //{
-        //    XmlSerializer serializador = new XmlSerializer(typeof(List<Compromisso>));
+        //    XmlSerializer serializador = new XmlSerializer(typeof(List<TEntidade>));
 
-        //    byte[] compromissoEmBytes = File.ReadAllBytes(NOME_ARQUIVO);
+        //    byte[] compromissoEmBytes = File.ReadAllBytes(ObterNomeArquivo());
 
         //    MemoryStream registroStream = new MemoryStream(compromissoEmBytes);
 

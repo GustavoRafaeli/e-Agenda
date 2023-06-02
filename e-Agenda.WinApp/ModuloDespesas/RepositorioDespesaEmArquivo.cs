@@ -1,4 +1,5 @@
 ﻿using e_Agenda.WinApp.ModuloCategoria;
+using e_Agenda.WinApp.ModuloContato;
 using e_Agenda.WinApp.ModuloTarefa;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,19 @@ namespace e_Agenda.WinApp.ModuloDespesas
 {
     public class RepositorioDespesaEmArquivo : RepositorioArquivoBase<Despesa>, IRepositorioDespesa
     {
-        public RepositorioDespesaEmArquivo(List<Despesa> despesas)
+        public RepositorioDespesaEmArquivo(ContextoDados contextoDados) : base(contextoDados)
         {
-            NOME_ARQUIVO = "C:\\Users\\Itachi\\Desktop\\C#Projects\\e-Agenda-2023-master\\Arquivos\\despesa-bin";
 
-            listaRegistros = despesas;
-
-            if (File.Exists(NOME_ARQUIVO))
-                CarregarRegistrosDoArquivo();
         }
+
         public List<Despesa> ListarDespesasPorCategorias(Categoria categoria)
         {
-            return listaRegistros.Where(d => d.CategoriasDaDespesa.Contains(categoria)).ToList();
+            return ObterRegistros().Where(d => d.CategoriasDaDespesa.Contains(categoria)).ToList();
+        }
+
+        public override List<Despesa> ObterRegistros()
+        {
+            return contextoDados.despesas;
         }
     }
 }

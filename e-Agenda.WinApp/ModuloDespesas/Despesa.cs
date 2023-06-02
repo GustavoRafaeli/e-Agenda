@@ -16,6 +16,10 @@ namespace e_Agenda.WinApp.ModuloDespesas
         public FormaPagamentoEnum TipoPagamento { get; set; }
         public List<Categoria> CategoriasDaDespesa { get; set; }
 
+        public Despesa()
+        {
+        }
+
         public Despesa(string descricao, decimal valor, DateTime data, FormaPagamentoEnum tipoPagamento)
         {
             Descricao = descricao;
