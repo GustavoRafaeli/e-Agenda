@@ -10,6 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\e-Agenda.Dominio\e-Agenda.Dominio.csproj" />
+    <ProjectReference Include="..\e-Agenda.Infra.Dados.Arquivo\e-Agenda.Infra.Dados.Arquivo.csproj" />
+    <ProjectReference Include="..\e-Agenda.Infra.Dados.Memoria\e-Agenda.Infra.Dados.Memoria.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -32,9 +38,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ModuloContato\Contatos.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="ModuloContato\Contatos.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

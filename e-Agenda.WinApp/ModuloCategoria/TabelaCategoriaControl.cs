@@ -1,4 +1,5 @@
-﻿using e_Agenda.WinApp.Compartilhado;
+﻿using e_Agenda.Dominio.ModuloCategoria;
+using e_Agenda.WinApp.Compartilhado;
 using e_Agenda.WinApp.ModuloCategoria;
 using System;
 using System.Collections.Generic;

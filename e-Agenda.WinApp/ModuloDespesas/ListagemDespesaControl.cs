@@ -1,4 +1,5 @@
-﻿using e_Agenda.WinApp.ModuloCompromisso;
+﻿using e_Agenda.Dominio.ModuloDespesas;
+using e_Agenda.WinApp.ModuloCompromisso;
 using e_Agenda.WinApp.ModuloContato;
 using e_Agenda.WinApp.ModuloDespesas;
 using System;

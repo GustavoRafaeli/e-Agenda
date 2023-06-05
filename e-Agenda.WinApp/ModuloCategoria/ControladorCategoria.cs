@@ -1,10 +1,6 @@
-﻿using e_Agenda.WinApp.ModuloDespesas;
-using e_Agenda.WinApp.ModuloTarefa;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using e_Agenda.Dominio.ModuloCategoria;
+using e_Agenda.Dominio.ModuloDespesas;
+using e_Agenda.WinApp.ModuloDespesas;
 
 namespace e_Agenda.WinApp.ModuloCategoria
 {

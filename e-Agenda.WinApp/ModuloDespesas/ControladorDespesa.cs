@@ -1,4 +1,6 @@
-﻿using e_Agenda.WinApp.ModuloCategoria;
+﻿using e_Agenda.Dominio.ModuloCategoria;
+using e_Agenda.Dominio.ModuloDespesas;
+using e_Agenda.WinApp.ModuloCategoria;
 using e_Agenda.WinApp.ModuloTarefa;
 using System;
 using System.Collections.Generic;

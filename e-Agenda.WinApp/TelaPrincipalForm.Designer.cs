@@ -59,6 +59,7 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.BackColor = Color.Cyan;
             menuStrip1.Items.AddRange(new ToolStripItem[] { cadastrosMenuItem, relatóriosToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
@@ -123,6 +124,7 @@
             // 
             // statusStrip1
             // 
+            statusStrip1.BackColor = Color.Cyan;
             statusStrip1.Items.AddRange(new ToolStripItem[] { labelRodape });
             statusStrip1.Location = new Point(0, 400);
             statusStrip1.Name = "statusStrip1";
@@ -138,6 +140,7 @@
             // 
             // barraFerramentas
             // 
+            barraFerramentas.BackColor = Color.Cyan;
             barraFerramentas.Enabled = false;
             barraFerramentas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, toolStripSeparator2, btnFiltrar, toolStripSeparator3, btnAdicionarItens, btnConcluirItens, btnVisualizarDespDeCategoria, toolStripSeparator1, labelTipoCadastro });
             barraFerramentas.Location = new Point(0, 24);
@@ -257,6 +260,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(611, 422);
             Controls.Add(panelRegistros);
             Controls.Add(barraFerramentas);
